@@ -1,208 +1,582 @@
+/* ================= CORE ================= */
+body {
+    margin: 0;
+    font-family: "Share Tech Mono", monospace;
+    background: #020b06;
+    color: #3cff7a;
+    overflow: hidden;
+}
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    text-shadow: 0 0 8px rgba(60,255,122,0.6);
 }
 
-body {
-  font-family: Arial, sans-serif;
-  background: #0f172a;
-  color: #e5e7eb;
-  line-height: 1.6;
+/* ================= CRT EFFECT ================= */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.25),
+        rgba(0,0,0,0.25) 1px,
+        transparent 2px,
+        transparent 4px
+    );
+    pointer-events: none;
+    z-index: 999;
 }
 
-/* NAV */
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 40px;
-  background: #020617;
-  position: sticky;
-  top: 0;
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(60,255,122,0.04);
+    animation: flicker 0.15s infinite;
+    pointer-events: none;
 }
 
-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 20px;
+@keyframes flicker {
+    0% { opacity: .9; }
+    50% { opacity: 1; }
+    100% { opacity: .95; }
 }
 
-nav a {
-  color: #e5e7eb;
-  text-decoration: none;
+/* ================= BOOT ================= */
+#boot {
+    position: fixed;
+    inset: 0;
+    background: #020b06;
+    padding: 40px;
+    z-index: 1000;
 }
 
-nav a:hover {
-  color: #38bdf8;
+.boot-line {
+    opacity: 0;
+    animation: show 0.4s forwards;
 }
 
+.boot-line:nth-child(1) { animation-delay: 0s; }
+.boot-line:nth-child(2) { animation-delay: .4s; }
+.boot-line:nth-child(3) { animation-delay: .8s; }
+.boot-line:nth-child(4) { animation-delay: 1.2s; }
+.boot-line:nth-child(5) { animation-delay: 1.6s; }
+
+@keyframes show {
+    to { opacity: 1; }
+}
+
+.loading {
+    margin-top: 20px;
+    width: 100%;
+    height: 14px;
+    border: 1px solid #3cff7a;
+}
+
+.loading span {
+    display: block;
+    height: 100%;
+    width: 0%;
+    background: #3cff7a;
+    animation: load 3s forwards;
+}
+
+@keyframes load {
+    to { width: 100%; }
+}
+
+.cursor::after {
+    content: "_";
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+/* ================= UI ================= */
+#ui {
+    display: none;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+header {
+    border-bottom: 2px solid #3cff7a;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+nav span {
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+nav span:hover {
+    text-decoration: underline;
+}
+
+main {
+    max-width: 900px;
+    margin: auto;
+    padding: 30px;
+}
+
+.panel {
+    border: 2px solid #3cff7a;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+.panel h2 {
+    margin-top: 0;
+    border-bottom: 1px solid #3cff7a;
+    padding-bottom: 5px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li::before {
+    content: "> ";
+}
+
+footer {
+    border-top: 2px solid #3cff7a;
+    text-align: center;
+    padding: 15px;
+    font-size: .8rem;
+}
+/* ================= VAULT BOY LOGO ================= */
+
+#vaultboy img {
+    width: 44px;
+    height: auto;
+    filter:
+        brightness(1.1)
+        contrast(1.3)
+        drop-shadow(0 0 8px rgba(60,255,122,0.8));
+    animation: idle 3s ease-in-out infinite;
+}
+
+/* ===== DEFAULT IDLE ===== */
+@keyframes idle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(2px); }
+}
+
+/* ===== TAB STATES ===== */
+
+/* STAT → confident thumbs-up bounce */
+.stat img {
+    animation: statBounce 1.5s infinite;
+}
+
+@keyframes statBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+}
+
+/* SKILLS → thinking nod */
+.skills img {
+    animation: skillsNod 2s infinite;
+}
+
+@keyframes skillsNod {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(-4deg); }
+}
+
+/* PROJECTS → excited shake */
+.projects img {
+    animation: projectShake 0.8s infinite;
+}
+
+@keyframes projectShake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-2px); }
+    50% { transform: translateX(2px); }
+    75% { transform: translateX(-1px); }
+    100% { transform: translateX(0); }
+}
+
+/* CONTACT → subtle pulse */
+.contact img {
+    animation: contactPulse 2s infinite;
+}
+
+@keyframes contactPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+/* ===== HEADER ===== */
+
+.site-header {
+    border-bottom: 2px solid #3cff7a;
+    padding: 14px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Logo + Title group */
 .logo {
-  color: #38bdf8;
+    display: flex;
+    align-items: center;
+    gap: 14px;
 }
 
-/* HERO */
-.hero {
-  text-align: center;
-  padding: 100px 20px;
+/* Vault Boy icon */
+.logo img {
+    width: 56px;              /* 👈 slightly enlarged */
+    height: auto;
+    image-rendering: pixelated;
+    filter:
+        brightness(1.2)
+        contrast(1.4)
+        drop-shadow(0 0 10px rgba(60,255,122,0.9));
+    animation: idle 3s ease-in-out infinite;
 }
 
-.hero h1 {
-  font-size: 3rem;
+/* Title text */
+.logo .title {
+    font-size: 1.4rem;
+    letter-spacing: 2px;
 }
 
-.hero span {
-  color: #38bdf8;
+/* Idle animation */
+@keyframes idle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(2px); }
+}
+/* ===== SCREEN SYSTEM ===== */
+
+.screen {
+    display: none;
 }
 
-.hero button {
-  margin-top: 20px;
-  padding: 10px 25px;
-  border: none;
-  background: #38bdf8;
-  color: #020617;
-  font-size: 1rem;
-  cursor: pointer;
-  border-radius: 5px;
+.screen.active {
+    display: block;
 }
 
-.hero button:hover {
-  opacity: 0.9;
+/* Optional: smooth screen change */
+.screen {
+    animation: fadeIn 0.3s ease-in;
 }
 
-/* SECTIONS */
-section {
-  padding: 80px 20px;
-  max-width: 1000px;
-  margin: auto;
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+/* ================= SCREEN LAYOUT ================= */
+
+main {
+    height: calc(100vh - 80px); /* header + footer space */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* All screens hidden by default */
+.screen {
+    display: none;
+    width: 100%;
+}
+
+/* Active screen centered */
+.screen.active {
+    display: flex;
+    justify-content: center;
+}
+
+/* Panel itself centered nicely */
+.screen.active .panel,
+.screen.active {
+    max-width: 700px;
+    margin: auto;
+}
+
+/* Smooth Pip-Boy screen fade */
+.screen {
+    animation: fadeIn 0.25s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+/* ==================================================
+   GLOBAL PIP-BOY SCREEN LAYOUT (FINAL FIX)
+   Applies to ALL tabs / screens
+================================================== */
+
+/* Main Pip-Boy display area */
+main {
+    min-height: calc(100vh - 72px); /* header height */
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    box-sizing: border-box;
+}
+
+/* Screen system */
+.screen {
+    display: none;
+    width: 100%;
+}
+
+.screen.active {
+    display: block;
+}
+
+/* Terminal panel */
+.panel {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+/* Remove accidental spacing issues */
+.panel * {
+    box-sizing: border-box;
+}
+
+/* Optional terminal polish */
+.panel h2 {
+    margin-top: 0;
+}
+
+/* Pip-Boy screen transition */
+.screen.active {
+    animation: pipboyFade 0.25s ease-in;
+}
+
+@keyframes pipboyFade {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* ==================================================
+   GLOBAL TEXT SCALE (TEXT ONLY)
+================================================== */
+
+/* Base text size for entire Pip-Boy UI */
+body {
+    font-size: 18px;          /* default was ~16px */
+    line-height: 1.6;
+    letter-spacing: 1.2px;
+}
+
+/* Headings */
+h1 {
+    font-size: 1.8em;
 }
 
 h2 {
-  margin-bottom: 20px;
-  color: #38bdf8;
+    font-size: 1.4em;
 }
 
-/* SKILLS */
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 15px;
+h3 {
+    font-size: 1.2em;
 }
 
-.skills-grid div {
-  background: #020617;
-  padding: 15px;
-  text-align: center;
-  border-radius: 5px;
+/* Navigation tabs */
+nav span {
+    font-size: 1.1em;
 }
 
-/* PROJECTS */
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
+/* Panel text */
+.panel p,
+.panel li {
+    font-size: 1.05em;
 }
 
-.project-card {
-  background: #020617;
-  padding: 20px;
-  border-radius: 5px;
+/* Terminal-style lists */
+ul li {
+    margin-bottom: 6px;
+}
+/* ==================================================
+   CRT FLICKER — NAV TABS
+================================================== */
+
+nav span {
+    position: relative;
+    animation: tabFlicker 3.5s infinite;
 }
 
-/* CONTACT */
-.contact-links {
-  display: flex;
-  gap: 20px;
+/* Random-looking CRT flicker */
+@keyframes tabFlicker {
+    0%, 96%, 100% { opacity: 1; }
+    97% { opacity: 0.85; }
+    98% { opacity: 1; }
+    99% { opacity: 0.9; }
 }
 
-.contact-links a {
-  color: #38bdf8;
-  text-decoration: none;
+/* Stronger glow on hover */
+nav span:hover {
+    text-shadow:
+        0 0 6px rgba(60,255,122,0.8),
+        0 0 12px rgba(60,255,122,0.6);
+}
+/* ==================================================
+   PIP-BOY SCREEN SWITCH FLICKER
+================================================== */
+
+main.flicker {
+    animation: screenFlicker 0.18s steps(2) 1;
 }
 
-/* FOOTER */
-footer {
-  text-align: center;
-  padding: 20px;
-  background: #020617;
-  font-size: 0.9rem;
-}
-.intro {
-  font-size: 1.1rem;
-  opacity: 0.8;
-  margin-bottom: 15px;
-}
-
-.tagline {
-  margin-top: 10px;
-  font-size: 1.1rem;
-  opacity: 0.9;
-}
-#about p {
-  max-width: 700px;
-  margin-top: 10px;
-  line-height: 1.8;
-  opacity: 0.9;
-}
-#contact {
-  text-align: center;
+@keyframes screenFlicker {
+    0% {
+        opacity: 1;
+        filter: brightness(1);
+    }
+    50% {
+        opacity: 0.85;
+        filter: brightness(1.4) contrast(1.2);
+    }
+    100% {
+        opacity: 1;
+        filter: brightness(1);
+    }
 }
 
-.contact-links {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-  gap: 20px;
+/* Horizontal scan glitch */
+main.flicker::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(
+            rgba(255,255,255,0.08) 2px,
+            transparent 2px
+        );
+    background-size: 100% 6px;
+    pointer-events: none;
+    animation: scanJump 0.18s steps(2) 1;
 }
 
-.contact-links a {
-  padding: 10px 20px;
-  border: 1px solid #38bdf8;
-  border-radius: 5px;
-  color: #38bdf8;
-  text-decoration: none;
-  transition: all 0.2s ease;
+@keyframes scanJump {
+    from { transform: translateY(-6px); }
+    to   { transform: translateY(6px); }
+}
+/* ==================================================
+   OCCASIONAL CRT SCREEN FLICKER
+================================================== */
+
+/* Flicker trigger class */
+body.crt-flicker {
+    animation: crtFlash 0.15s steps(2) 1;
 }
 
-.contact-links a:hover {
-  background: #38bdf8;
-  color: #020617;
-}
-#skills {
-  text-align: center;
-}
-
-.skills-grid {
-  margin-top: 30px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 15px;
-}
-
-.skill {
-  background: #020617;
-  padding: 15px;
-  border-radius: 6px;
-  border: 1px solid #1e293b;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+@keyframes crtFlash {
+    0% {
+        opacity: 1;
+        filter: brightness(1);
+    }
+    50% {
+        opacity: 0.85;
+        filter: brightness(1.35) contrast(1.2);
+    }
+    100% {
+        opacity: 1;
+        filter: brightness(1);
+    }
 }
 
-.skill:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(56, 189, 248, 0.3);
+/* Horizontal scan flash */
+body.crt-flicker::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background:
+        linear-gradient(
+            rgba(255,255,255,0.08) 2px,
+            transparent 2px
+        );
+    background-size: 100% 6px;
+    pointer-events: none;
+    animation: crtScanJump 0.15s steps(2) 1;
+    z-index: 9999;
 }
-/* ===== ANIMATIONS ===== */
 
-/* hidden state */
-.animate {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.6s ease-out;
+@keyframes crtScanJump {
+    from { transform: translateY(-8px); }
+    to   { transform: translateY(8px); }
+}
+/* ==================================================
+   PIP-BOY CRT SCAN LINE (MOVING)
+================================================== */
+
+/* Moving scan line */
+body::after {
+    content: "";
+    position: fixed;
+    left: 0;
+    top: -10%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(
+        to right,
+        transparent,
+        rgba(60,255,122,0.35),
+        transparent
+    );
+    opacity: 0.6;
+    animation: scanLineMove 6s linear infinite;
+    pointer-events: none;
+    z-index: 9998;
 }
 
-/* visible state */
-.animate.show {
-  opacity: 1;
-  transform: translateY(0);
+/* Scan line movement */
+@keyframes scanLineMove {
+    from {
+        top: -10%;
+    }
+    to {
+        top: 110%;
+    }
+}
+/* ==================================================
+   HEADER RESUME DOWNLOAD (PIP-BOY STYLE)
+================================================== */
+
+.resume-download {
+    margin-left: 14px;
+    font-size: 0.9em;
+    cursor: pointer;
+    opacity: 0.8;
+    letter-spacing: 1px;
+}
+
+.resume-download:hover {
+    opacity: 1;
+    text-shadow:
+        0 0 6px rgba(60,255,122,0.8),
+        0 0 12px rgba(60,255,122,0.6);
+}
+.resume-download {
+    animation: resumeBlink 2s infinite;
+}
+
+@keyframes resumeBlink {
+    0%, 90%, 100% {
+        opacity: 0.85;
+        text-shadow: 0 0 6px rgba(60,255,122,0.6);
+    }
+    91% {
+        opacity: 1;
+        text-shadow:
+            0 0 8px rgba(60,255,122,0.9),
+            0 0 16px rgba(60,255,122,0.7);
+    }
 }
