@@ -1,69 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SAID ROSHAN K | Portfolio</title>
+    <meta charset="UTF-8">
+    <title>Roshan | Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="style.css" />
+    <!-- FONT -->
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- NAVBAR -->
+<!-- BOOT SCREEN -->
+<div id="boot">
+    <p class="boot-line">SYD INDUSTRIES UNIFIED OS</p>
+    <p class="boot-line">COPYRIGHT 2025-2077 SYD</p>
+    <p class="boot-line">INITIALIZING PERSONAL TERMINAL...</p>
+    <p class="boot-line">LOADING USER: POTENTIAL EMPLOYER</p>
+    <p class="boot-line">SYSTEM ONLINE<span class="cursor"></span></p>
+
+    <div class="loading">
+        <span></span>
+    </div>
+</div>
+
+<!-- MAIN WEBSITE -->
+<div id="ui">
+
+<header class="site-header">
+   <div class="logo" id="vaultboy">
+    <img src="vaultboy-logo.png" alt="Vault Boy Logo">
+
+    <span class="title">SAID ROSHAN</span>
+
+    <span class="resume-download" id="resumeDownload">
+        [ DOWNLOAD RESUME ]
+    </span>
+</div>
+
+
   <nav>
-    <h2 class="logo">SAID ROSHAN K</h2>
-    <ul>
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
+    <span data-mode="stat" data-target="stat">STAT</span>
+    <span data-mode="skills" data-target="skills">SKILLS</span>
+    <span data-mode="experience" data-target="experience">EXPERIENCE</span>
+    <span data-mode="projects" data-target="projects">PROJECTS</span>
+    <span data-mode="contact" data-target="contact">CONTACT</span>
+</nav>
 
-  <!-- HERO -->
-  <section class="hero">
 
-  <!-- INTRO -->
-  <p class="intro">
-    👋 Hi, welcome to my space on the internet.
-  </p>
+</header>
 
-  <!-- PROFILE IMAGE -->
-  <img src="assets/profile.jpg" alt="Photo of syy-get" class="profile-pic">
 
-  <!-- NAME -->
-  <h1>Hi, I’m <span>SAID ROSHAN</span></h1>
 
-  <!-- TAGLINE -->
-  <p class="tagline">
-    eLECTRONICS ENGINEER • Tech Explorer • Automation Enthusiast
-  </p>
+<main>
 
-  <!-- CTA -->
-  <button onclick="scrollToSection('projects')">
-    View Projects
-  </button>
+    <section class="panel screen active" id="stat">
+        <h2>BASIC</h2>
+        <p>NAME: SAID ROSHAN K</p>
+        <p>ROLE: ENGINEER</p>
+        <p>LOCATION: INDIA</p>
+        <p> STATUS: LOOKING FOR JOB</p>
+    </section>
 
+    <section class="panel screen" id="skills">
+        <h2>SKILLS</h2>
+        <ul>
+            <li>TERMINAL HACKING</li>
+            <li>HTML / CSS / JS</li>
+            <li>PYTHON & AUTOMATION</li>
+            <li>AI & LOCAL LLMs</li>
+        </ul>
+    </section>
+    <section class="panel screen" id="experience">
+    <h2>WORK EXPERIENCE</h2>
+
+    <p>> SYSTEM ENGINEER</p>
+    <p>  IMMERSIVE DISPLAY SYSTEMS</p>
+    <p>  MULTI-PROJECTOR SETUPS</p>
+    <p>  CALIBRATION & BLENDING</p>
+
+    <br>
+
+    <p>> AUTOMATION DEVELOPER</p>
+    <p>  TELEGRAM BOTS & AI TOOLS</p>
+    <p>  LOCAL LLM INTEGRATION</p>
+    <p>  WORKFLOW OPTIMIZATION</p>
 </section>
-<section id="about">
-  <h2>About Me</h2>
-  <p>
-    Electronics and Embedded Systems Engineer with hands-on experience in microcontrollers, motor
-control, sensor integration, and IoT systems. Strong in building, debugging, and deploying real
-world embedded solutions, from circuit-level work to firmware and system integration
-  </p>
-</section>
-<section id="projects">
-  ...
-</section>
 
-<section id="contact">
-  <h2>Contact</h2>
-  <p>If you’d like to connect or collaborate, feel free to reach out 👇</p>
 
-  <div class="contact-links">
-    <a href="mailto:saidroshank24@gmail.com">Email</a>
-    <a href="https://github.com/syy-get" target="_blank">GitHub</a>
-    <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
-  </div>
-</section>
+    <section class="panel screen" id="projects">
+        <h2>PROJECTS</h2>
+        <p>> TELEGRAM AI BOTS</p>
+        <p>> AUTOMATION SYSTEMS</p>
+        <p>> UI EXPERIMENTS</p>
+        <p>> IMMERSIVE DISPLAY SETUPS</p>
+    </section>
+
+    <section class="panel screen" id="contact">
+        <h2>CONTACT</h2>
+        <p>> EMAIL: your@email.com</p>
+        <p>> GITHUB: github.com/yourname</p>
+        <p>> STATUS: AVAILABLE</p>
+    </section>
+
+</main>
+
+
+<footer>
+    SAID ROSHAN — PERSONAL TERMINAL v1.0
+</footer>
+
+</div>
+
+<!-- JS -->
+<script src="script.js" defer></script>
+</body>
+</html>
